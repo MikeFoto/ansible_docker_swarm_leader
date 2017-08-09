@@ -1,0 +1,14 @@
+- name: Check if we are already a manager
+  shell:
+    docker swarm join-token worker
+  ignore_errors: yes
+  changed_when:  False
+  register:      docker_status
+
+#
+# We must have one IP on systems with multiple addresses
+- name: Start node as manager
+  shell:
+    docker swarm init --advertise-addr {{ swarm_manager_ip }}
+  when:
+    docker_status.rc != 0
