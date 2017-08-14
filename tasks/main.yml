@@ -12,3 +12,15 @@
     docker swarm init --advertise-addr {{ swarm_manager_ip }}
   when:
     docker_status.rc != 0
+
+- name: Check if we are Leader
+  shell:
+    docker node ls | grep `hostname ` | grep Leader  | wc -l
+  changed_when:  False
+  register:      docker_status_1
+
+- name: fail if we are not the Leader
+  fail:
+    msg: "We could not become leader {{ docker_status_1.stdout_lines[0]}}"
+  when:
+    docker_status_1.stdout_lines[0] != "1"
