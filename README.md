@@ -1,5 +1,5 @@
-# Docker Swarm node setup 
-As a Manager 
+# Docker Swarm node setup
+Set one node as a Leader
 
 # License
 
