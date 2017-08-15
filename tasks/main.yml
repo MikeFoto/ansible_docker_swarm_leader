@@ -1,13 +1,26 @@
-- name: Check if we are already a manager
+- name: Check if Leader exists
+  shell:
+    docker node ls  |  grep Leader | tr -s '[:space:]' | cut -f 2 -d " "
+  ignore_errors: yes
+  changed_when:  False
+  register:      leader_exist
+
+- name: fail if we are not the Leader
+  fail:
+    msg : "leader is {{ leader_exist.stdout_lines[0] }} I am {{ ansible_fqdn }}"
+  when:
+    leader_exist.stdout_lines[0] != ansible_fqdn
+
+
+- name: Check if we are already the Leader
   shell:
     docker swarm join-token worker
   ignore_errors: yes
   changed_when:  False
   register:      docker_status
-
 #
 # We must have one IP on systems with multiple addresses
-- name: Start node as manager
+- name: Start node as Leader
   shell:
     docker swarm init --advertise-addr {{ swarm_manager_ip }}
   when:
