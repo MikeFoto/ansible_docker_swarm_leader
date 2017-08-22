@@ -3,7 +3,7 @@ Set one node as a Leader
 
 # License
 
-MIT
+GNU GPLv3 
 
 # Author Information
 
