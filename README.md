@@ -1,9 +1,8 @@
-# Docker Swarm node setup
-Set one node as a Leader
+# Docker Swarm node setup as a Leader 
 
 # License
 
-GNU GPLv3 
+GNU GPLv3
 
 # Author Information
 

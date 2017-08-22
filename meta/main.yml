@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: MikeFoto
+  description: Docker Swarm node setup as a Leader
+  license: GNU General Public License v3.0
+  min_ansible_version: 2.0
+  platforms:
+  - name: EL
+    versions:
+    - all
+  categories:
+  - docker
+  - docker_swarm 
+dependencies: []
